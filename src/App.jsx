@@ -13,7 +13,7 @@ console.log(tasks)
 useEffect(() => {
   async function fetchTasks(){
     try {
-      const response = await axios.get("https://todolist7.vercel.app/tasks")
+      const response = await axios.get("https://todolist-backend-yxqb.onrender.com/tasks")
       console.log("Fetched tasks:", response.data); 
       setTasks(response.data)
     } catch (error) {
@@ -31,7 +31,7 @@ useEffect(() => {
     if(inputValue.trim() !== "") {
       try{
         const newTask = {text: inputValue, done: false}
-       const response = await axios.post("https://todolist7.vercel.app/tasks", newTask)
+       const response = await axios.post("https://todolist-backend-yxqb.onrender.com/tasks", newTask)
         console.log("Added task:", response.data);
       setTasks([...tasks, response.data])
       setInputValue("")
@@ -45,7 +45,7 @@ useEffect(() => {
   const handleDeleteTask = async (id) => {
     console.log("Deleting task with id:", id);
     try {
-     await axios.delete(`https://todolist7.vercel.app/tasks/${id}`) 
+     await axios.delete(`https://todolist-backend-yxqb.onrender.com/tasks/${id}`) 
      setTasks(tasks.filter(task => task.id !== id))
     }
    catch (error) {
@@ -60,7 +60,7 @@ useEffect(() => {
         throw new Error("task not found")
       }
       const updatedTask = { ...task, done: !task.done }
-      await axios.put(`https://todolist7.vercel.app/tasks/${id}`, updatedTask)
+      await axios.put(`https://todolist-backend-yxqb.onrender.com/tasks/${id}`, updatedTask)
       const updatedTasks = tasks.map(t => t.id === id ? updatedTask : t)
       
       setTasks(updatedTasks)
@@ -76,7 +76,7 @@ useEffect(() => {
     if (newText !== null && newText.trim() !== "") {
       const updatedTask = { ...tasks.find(task => task.id === id), text: newText };
       try {
-        await axios.put(`https://todolist7.vercel.app/tasks/${id}`, updatedTask);
+        await axios.put(`https://todolist-backend-yxqb.onrender.com/tasks/${id}`, updatedTask);
         const updatedTasks = tasks.map(t => t.id === id ? updatedTask : t);
         setTasks(updatedTasks);
       } catch (error) {
